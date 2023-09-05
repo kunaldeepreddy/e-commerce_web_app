@@ -1,0 +1,11 @@
+.iconStyle {
+    font-size: 15px;
+    padding: 5px;
+    color: #FFFFFF;
+    background-color: #151875;
+    border-radius: 50%;
+}
+
+.linkClass {
+    line-height: 2 !important;
+}
