@@ -6,7 +6,7 @@ import TwitterIcon from '@mui/icons-material/Twitter';
 import './Footer.css';
 const Footer = () => {
     const theme = useTheme();
-    console.log(theme);
+    // console.log(theme);
     return (
         <Container disableGutters style={{fontSize:'14px'}} sx={{bgcolor: "#EEEFFB", color: theme.palette.text.secondary, paddingTop: "2rem" }}>
             <Grid container spacing={1} >

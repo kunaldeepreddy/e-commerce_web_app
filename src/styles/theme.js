@@ -57,6 +57,12 @@ const theme = createTheme({
       },
     },
   },
+  typography: {
+    fontFamily: [
+      'Josefin Sans',
+      'sans-serif',
+    ].join(','),
+  },
   // overrides: {
   //   MuiInput: {
   //     // Name of the styleSheet

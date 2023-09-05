@@ -24,9 +24,9 @@ const Header = (props) => {
   const navigate = useNavigate();
   const [value, setValue] = useState(0);
   const theme = useTheme();
-  console.log(theme);
+  // console.log(theme);
   const isMatch = useMediaQuery(theme.breakpoints.down("sm"));
-  console.log(isMatch);
+  // console.log(isMatch);
   const isSmallScreenMatch = useMediaQuery(theme.breakpoints.down(350));
 
   const handleLoginButtonclick = () => {

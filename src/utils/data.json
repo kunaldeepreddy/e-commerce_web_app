@@ -884,7 +884,7 @@
                 {
                     "_id": "63543a795c1cb8ee67e52c19",
                     "name": "Amptron",
-                    "display_pic": "https://bspns-dev-images.s3.ap-south-1.amazonaws.com/1666464434110_supplier.png",
+                    "display_pic": "../assets/productPics/image 1.png",
                     "price": 999,
                     "offer_price": 899,
                     "rating": 1
@@ -892,7 +892,7 @@
                 {
                     "_id": "63543b6a5c1cb8ee67e52ca9",
                     "name": "Enerdrive",
-                    "display_pic": "https://bspns-dev-images.s3.ap-south-1.amazonaws.com/1666464617859_supplier.jpg",
+                    "display_pic": "../assets/productPics/image 2.png",
                     "price": 999,
                     "offer_price": 899,
                     "rating": 1
@@ -900,7 +900,7 @@
                 {
                     "_id": "63543bdb5c1cb8ee67e52cf1",
                     "name": "Evakool",
-                    "display_pic": "https://bspns-dev-images.s3.ap-south-1.amazonaws.com/1666464730370_supplier.png",
+                    "display_pic": "../assets/productPics/image 3.png",
                     "price": 999,
                     "offer_price": 899,
                     "rating": 1
@@ -908,7 +908,7 @@
                 {
                     "_id": "63543c375c1cb8ee67e52d2d",
                     "name": "Solarking",
-                    "display_pic": "https://bspns-dev-images.s3.ap-south-1.amazonaws.com/1666464823189_supplier.png",
+                    "display_pic": "../assets/productPics/image 4.png",
                     "price": 999,
                     "offer_price": 899,
                     "rating": 1
@@ -916,7 +916,7 @@
                 {
                     "_id": "63543c885c1cb8ee67e52d69",
                     "name": "Satking",
-                    "display_pic": "https://bspns-dev-images.s3.ap-south-1.amazonaws.com/1666464903700_supplier.jpg",
+                    "display_pic": "../assets/productPics/image 5.jpg",
                     "price": 999,
                     "offer_price": 899,
                     "rating": 1
@@ -924,7 +924,7 @@
                 {
                     "_id": "63543a795c1cb8ee67e52c39",
                     "name": "chair1",
-                    "display_pic": "https://bspns-dev-images.s3.ap-south-1.amazonaws.com/1666464434110_supplier.png",
+                    "display_pic":"../assets/productPics/image 6.png",
                     "price": 999,
                     "offer_price": 899,
                     "rating": 1
@@ -932,7 +932,7 @@
                 {
                     "_id": "63543b6a5c14b8ee67e52ca9",
                     "name": "Enerdrive chair1",
-                    "display_pic": "https://bspns-dev-images.s3.ap-south-1.amazonaws.com/1666464617859_supplier.jpg",
+                    "display_pic": "../assets/productPics/image 7.png",
                     "price": 999,
                     "offer_price": 899,
                     "rating": 1
@@ -940,7 +940,7 @@
                 {
                     "_id": "63543b4b5c1cb8ee67e52cf1",
                     "name": "Evakool chair1",
-                    "display_pic": "https://bspns-dev-images.s3.ap-south-1.amazonaws.com/1666464730370_supplier.png",
+                    "display_pic": "../assets/productPics/image 8.png",
                     "price": 999,
                     "offer_price": 899,
                     "rating": 1
@@ -948,7 +948,7 @@
                 {
                     "_id": "635433375c1cb8ee67e52d2d",
                     "name": "Solarking chair1",
-                    "display_pic": "https://bspns-dev-images.s3.ap-south-1.amazonaws.com/1666464823189_supplier.png",
+                    "display_pic": "../assets/productPics/image 9.png",
                     "price": 999,
                     "offer_price": 899,
                     "rating": 1
@@ -956,7 +956,7 @@
                 {
                     "_id": "63543c885c1cb2ee47e52d69",
                     "name": "Satking chair2",
-                    "display_pic": "https://bspns-dev-images.s3.ap-south-1.amazonaws.com/1666464903700_supplier.jpg",
+                    "display_pic": "../assets/productPics/image 10.png",
                     "price": 999,
                     "offer_price": 899,
                     "rating": 1
@@ -964,7 +964,7 @@
                 {
                     "_id": "63843b6a5c14b8ee67e52ca9",
                     "name": "Enerdrive chair2",
-                    "display_pic": "https://bspns-dev-images.s3.ap-south-1.amazonaws.com/1666464617859_supplier.jpg",
+                    "display_pic": "../assets/productPics/image 11.png",
                     "price": 999,
                     "offer_price": 899,
                     "rating": 1
@@ -972,7 +972,7 @@
                 {
                     "_id": "63543b4b5t1cb8ee67e529f1",
                     "name": "Evakool chair2",
-                    "display_pic": "https://bspns-dev-images.s3.ap-south-1.amazonaws.com/1666464730370_supplier.png",
+                    "display_pic": "../assets/productPics/image 12.png",
                     "price": 999,
                     "offer_price": 899,
                     "rating": 1
@@ -980,7 +980,7 @@
                 {
                     "_id": "635433375c1cv8ee67e52d2d",
                     "name": "Solarking chair2",
-                    "display_pic": "https://bspns-dev-images.s3.ap-south-1.amazonaws.com/1666464823189_supplier.png",
+                    "display_pic": "../assets/productPics/image 13.png",
                     "price": 999,
                     "offer_price": 899,
                     "rating": 1
@@ -988,7 +988,7 @@
                 {
                     "_id": "63543c885c1cb2ee67e52d69",
                     "name": "Satking chair1",
-                    "display_pic": "https://bspns-dev-images.s3.ap-south-1.amazonaws.com/1666464903700_supplier.jpg",
+                    "display_pic": "../assets/productPics/image 14.png",
                     "price": 999,
                     "offer_price": 899,
                     "rating": 1
@@ -1337,18 +1337,18 @@
                 }
             ]
         },
-        "carousel pics": [
+        "carouselPics": [
             {
                 "_id": "62d3d25a563002a0735b06b3",
-                "image": "https://bspns-dev-images.s3.ap-south-1.amazonaws.com/product_1658049102671.jpg"
+                "image": "../assets/sofa promotional header.png"
             },
             {
                 "_id": "62d3d25a563002a0735b06b4",
-                "image": "https://bspns-dev-images.s3.ap-south-1.amazonaws.com/product_1658049105625.jpg"
+                "image": "../assets/Home-Stylish-Club-Sofa.png"
             },
             {
                 "_id": "62d3d25a563002a0735b06b5",
-                "image": "https://bspns-dev-images.s3.ap-south-1.amazonaws.com/product_1658049107944.jpg"
+                "image": "../assets/Group 153.png"
             }
         ],
         "trendingProducts": [
