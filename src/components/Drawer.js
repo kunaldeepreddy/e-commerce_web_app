@@ -12,22 +12,32 @@ import {
   useTheme
 } from "@mui/material";
 import MenuIcon from "@mui/icons-material/Menu";
+import { Link } from "react-router-dom";
 import PersonOutlineOutlinedIcon from '@mui/icons-material/PersonOutlineOutlined';
 import ShoppingCartOutlinedIcon from '@mui/icons-material/ShoppingCartOutlined';
 import BookmarkAddOutlinedIcon from '@mui/icons-material/BookmarkAddOutlined';
-const pages = ["Home", "Products", "About Us", "Contact Us"];
+// const pages = ["Home", "Products", "About Us", "Contact Us"];
+const pages = [
+  {
+    name: "Home",
+    path: '/home'
+  },
+  {
+    name: "Products",
+    path: '/products'
+  },
+  {
+    name: "About Us",
+    path: '/aboutUs'
+  },
+  {
+    name: "Contact Us",
+    path: '/contactUs'
+  }
+]
 const DrawerComp = () => {
   const [openDrawer, setOpenDrawer] = useState(false);
   const theme = useTheme();
-  const handleLoginButtonclick = () => {
-    const urlObject = new URL(window.location.href);
-    const currentEndpoint = urlObject.pathname;
-    if (currentEndpoint !== '/login') {
-      const currentURL = window.location.href;
-      const newURL = currentURL + 'login';
-      window.location.href = newURL;
-    }
-  }
   return (
     <React.Fragment>
       <Drawer
@@ -37,14 +47,14 @@ const DrawerComp = () => {
       >
         <List sx={{ width: '60vw', backgroundColor: theme.palette.secondary.main }}>
           <ListItem >
-            <Button style={{ alignItems: 'left' }} onClick={handleLoginButtonclick} sx={{
+            <Button component={Link} to={'/login'} style={{ alignItems: 'left' }} sx={{
               color: theme.palette.primary.light, borderColor: theme.palette.primary.light,
               transition: 'box-shadow 0.3s', // Adding a smooth transition for the hover effect
               '&:hover': {
                 borderColor: theme.palette.primary.light,
                 boxShadow: '4px 4px 8px rgba(0, 0, 0, 0.3)', // Shadow on hover
               },
-            }} variant="outlined" startIcon={<PersonOutlineOutlinedIcon />}>
+            }} variant="outlined" startIcon={<PersonOutlineOutlinedIcon />} onClick={() => setOpenDrawer(false)}>
               Login
             </Button>
           </ListItem>
@@ -60,9 +70,9 @@ const DrawerComp = () => {
         <Divider />
         <List>
           {pages.map((page, index) => (
-            <ListItemButton key={index}>
+            <ListItemButton key={index} component={Link} to={page.path} onClick={() => setOpenDrawer(false)}>
               <ListItemIcon>
-                <ListItemText>{page}</ListItemText>
+                <ListItemText>{page.name}</ListItemText>
               </ListItemIcon>
             </ListItemButton>
           ))}

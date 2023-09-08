@@ -56,6 +56,13 @@ const theme = createTheme({
         },
       },
     },
+    MuiListItemIcon: {
+      styleOverrides: {
+        root: {
+          minWidth: '20px',
+        },
+      }
+    },
   },
   typography: {
     fontFamily: [
@@ -63,6 +70,13 @@ const theme = createTheme({
       'sans-serif',
     ].join(','),
   },
+  // overrides: {
+  //   MuiListItemIcon: {
+  //     root: {
+  //       minWidth: '20px',
+  //     },
+  //   },
+  // },
   // overrides: {
   //   MuiInput: {
   //     // Name of the styleSheet

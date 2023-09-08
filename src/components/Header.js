@@ -12,32 +12,21 @@ import {
   InputAdornment,
   IconButton,
   Grid,
-  Icon,
+  Icon, 
 } from "@mui/material";
 import SearchIcon from "@mui/icons-material/Search";
 import PersonOutlineOutlinedIcon from '@mui/icons-material/PersonOutlineOutlined';
 import ShoppingCartOutlinedIcon from '@mui/icons-material/ShoppingCartOutlined';
-import { useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 // import { AiOutlineSearch } from 'react-icons/ai';
 import DrawerComp from "./Drawer";
 const Header = (props) => {
-  const navigate = useNavigate();
   const [value, setValue] = useState(0);
   const theme = useTheme();
   // console.log(theme);
   const isMatch = useMediaQuery(theme.breakpoints.down("sm"));
   // console.log(isMatch);
   const isSmallScreenMatch = useMediaQuery(theme.breakpoints.down(350));
-
-  const handleLoginButtonclick = () => {
-    const urlObject = new URL(window.location.href);
-    const currentEndpoint = urlObject.pathname;
-    if (currentEndpoint !== '/login') {
-      const currentURL = window.location.href;
-      const newURL = currentURL + 'login';
-      window.location.href = newURL;
-    }
-  }
 
   return (
     <React.Fragment>
@@ -107,7 +96,7 @@ const Header = (props) => {
                   <Grid item xs={9}>
                   </Grid>
                   <Grid item xs={1}>
-                    <Button sx={{ lineHeight: '0', color: theme.palette.primary.light }} onClick={handleLoginButtonclick}>
+                    <Button sx={{ lineHeight: '0', color: theme.palette.primary.light }} component={Link} to={'/login'}>
                       <Typography color={theme.palette.primary.light} variant="caption">Login</Typography>
                       <Icon ><PersonOutlineOutlinedIcon /></Icon>
                     </Button>
@@ -144,13 +133,13 @@ const Header = (props) => {
                       onChange={(e, value) => setValue(value)}
                       centered
                     >
-                      <Tab sx={{ fontSize: '0.7rem' }} label="Home" onClick={()=> {navigate("/home");}} >
+                      <Tab sx={{ fontSize: '0.7rem' }} label="Home" component={Link} to="/home" >
                       </Tab>
-                      <Tab sx={{ fontSize: '0.7rem' }} label="Products" >
+                      <Tab sx={{ fontSize: '0.7rem' }} label="Products" component={Link} to="/products" >
                       </Tab>
-                      <Tab sx={{ fontSize: '0.7rem' }} label="About Us" >
+                      <Tab sx={{ fontSize: '0.7rem' }} label="About Us" component={Link} to="/aboutUs" >
                       </Tab>
-                      <Tab sx={{ fontSize: '0.7rem' }} label="Contact Us" >
+                      <Tab sx={{ fontSize: '0.7rem' }} label="Contact Us" component={Link} to="/contactUs" >
                       </Tab>
                     </Tabs>
                   </Grid>
@@ -189,13 +178,6 @@ const Header = (props) => {
                   </Grid>
                 </Grid>
               </div>
-
-              {/* <Button sx={{ marginLeft: "auto" }} variant="contained">
-                Login
-              </Button>
-              <Button sx={{ marginLeft: "10px" }} variant="contained">
-                SignUp
-              </Button> */}
             </>
           )}
         </Toolbar>

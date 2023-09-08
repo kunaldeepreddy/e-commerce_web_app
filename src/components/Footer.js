@@ -1,13 +1,22 @@
 import React from "react";
-import { Container, Grid, Link, Typography, useTheme, IconButton, InputAdornment, Button, TextField } from "@mui/material";
+import { Container, Grid, Link, Typography, useTheme, IconButton, InputAdornment, Button, TextField, Box } from "@mui/material";
 import FacebookIcon from '@mui/icons-material/Facebook';
 import InstagramIcon from '@mui/icons-material/Instagram';
 import TwitterIcon from '@mui/icons-material/Twitter';
+import footerImage from '../assets/image 1174.png'
 import './Footer.css';
 const Footer = () => {
     const theme = useTheme();
     // console.log(theme);
     return (
+      <>
+      <Box sx={{display: 'flex', placeContent:"center", margin:'3rem 0 3rem 0'}}>
+      <img src={footerImage} alt="footer Image" style={{
+          // objectFit: "contain",
+          maxWidth: '50%',
+          height: 'auto'
+        }} />
+      </Box>
         <Container disableGutters style={{fontSize:'14px'}} sx={{bgcolor: "#EEEFFB", color: theme.palette.text.secondary, paddingTop: "2rem" }}>
             <Grid container spacing={1} >
                 <Grid item sm={1.75}></Grid>
@@ -97,6 +106,7 @@ const Footer = () => {
                 </Grid>
             </Grid>
         </Container>
+        </>
     );
 };
 
