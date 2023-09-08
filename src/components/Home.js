@@ -10,9 +10,10 @@ import homeContainerImage from '../assets/home-container-image.avif';
 import HomeCarousel from "./HomeCarousel.js";
 import CardCarousel from "./CardCarousel.js";
 import LatestProducts from "./LatestProducts.js";
+
 const Home = () => {
   const theme = useTheme();
-  console.log(dataObject);
+  // console.log(dataObject);
   const homeCauroselPics = () => {
     return dataObject.data.carouselPics.map((item) => {
       return <HomeCarousel key={item._id} image={item.image} />
@@ -71,7 +72,8 @@ const Home = () => {
         }}>
         {homeCauroselPics()}
       </Carousel>
-      <CardCarousel data={dataObject.data.LatestProducts.FeaturedProducts} />
+      <Typography color="#1A0B5B" variant="h5" sx={{ fontWeight: 800, textAlign: 'center', padding: '1em 0 1em 0' }}>Featured Products</Typography>
+      <CardCarousel data={dataObject.data.LatestProducts.FeaturedProducts} cardPanelType='MultiPanelCardCarousel' />
       <Box sx={{ pt: '5px' }}>
         <Typography color="#1A0B5B" variant="h5" sx={{ fontWeight: 800, textAlign: 'center', padding: '1em 0 1em 0' }}>Latest Products</Typography>
         <LatestProducts dataObject={dataObject} />
@@ -194,7 +196,7 @@ const Home = () => {
           </Grid>
         </Grid>
       </Box>
-      <Box sx={{ backgroundColor: 'transparent' , padding:'1rem 0 1rem 0', marginTop:'2rem'}} style={{
+      <Box sx={{ backgroundColor: 'transparent', padding: '4rem 0 4rem 0', marginTop: '2rem' }} style={{
         backgroundImage: `url(${homeContainerImage})`, // Use the same background image
         backgroundSize: 'cover', // Adjust as needed
         backgroundAttachment: 'fixed', // Fixed background on scroll
@@ -206,22 +208,24 @@ const Home = () => {
         alignItems: 'center',
         justifyContent: 'center',
       }}>
-        <Typography style={{ textAlign: "center" , fontWeight:700}} variant="h6" color="#151875">
+        <Typography style={{ textAlign: "center", fontWeight: 700 }} variant="h6" color="#151875">
           Get latest updates by subscribing to our news letter
         </Typography>
         <Button type="submit" fullWidth variant="contained" color="primary" sx={{
-            margin: (theme) => theme.spacing(2, 0, 2), borderRadius: '2px', textTransform: 'none',
-            width: '70vh',
-            minWidth: '100px',
-            '&:hover': {
-              color: theme.palette.primary.main,
-              backgroundColor: theme.palette.primary.light,
-              borderColor: theme.palette.primary.main,
-              boxShadow: `0px 0px 0px 1px ${theme.palette.primary.main}`
-            },
-            width: '20%',
-          }}>Subscribe</Button>
+          margin: (theme) => theme.spacing(2, 0, 2), borderRadius: '2px', textTransform: 'none',
+          width: '70vh',
+          minWidth: '100px',
+          '&:hover': {
+            color: theme.palette.primary.main,
+            backgroundColor: theme.palette.primary.light,
+            borderColor: theme.palette.primary.main,
+            boxShadow: `0px 0px 0px 1px ${theme.palette.primary.main}`
+          },
+          width: '20%',
+        }}>Subscribe</Button>
       </Box>
+      <Typography color="#1A0B5B" variant="h5" sx={{ fontWeight: 800, textAlign: 'center', padding: '1em 0 1em 0' }}>Offers Of The Day</Typography>
+      <CardCarousel data={dataObject.data.LatestProducts.specialOfferProducts} cardPanelType='OfferOfTheDay' />
     </Container>
   );
 }
