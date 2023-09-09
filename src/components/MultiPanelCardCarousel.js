@@ -23,7 +23,7 @@ const MultiPanelCardCarousel = ({cardObject, cardMediaStyle}) => {
               flex: 0.6,
             }
           }}
-          style={{ height: '100%', width: '100%' }}
+          style={{ height: '100%', width: '100%', maxWidth: '200px' }}
         >
           <CardActionArea>
             <CardMedia

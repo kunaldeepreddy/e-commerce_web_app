@@ -67,7 +67,7 @@ function CardCarousel({ data, cardPanelType }) {
                     duration='500'
                     interval='4000'
                     swipe={true}
-                    autoPlay={false}
+                    autoPlay={true}
                     indicatorIconButtonProps={{
                         style: {// 1
                             // width: '10px',
