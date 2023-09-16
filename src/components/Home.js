@@ -21,7 +21,7 @@ const Home = () => {
   }
 
   return (
-    <Container disableGutters >
+    <Container disableGutters maxWidth={false} >
       <Carousel
         animation='slide'
         duration='500'
@@ -141,18 +141,18 @@ const Home = () => {
         <Grid container spacing={2} >
           <Grid item xs={2}>
           </Grid>
-          <Grid item xs={8} sx={{ display: 'flex', flexWrap: 'wrap', flexDirection: "row", alignItems: 'center', justifyContent: "space-around", gap: '15px' }}>
+          <Grid item xs={8} sx={{ display: 'flex', flexWrap: 'wrap', flexDirection: "row", alignItems: 'center', justifyContent: "space-around", gap: '10px' }}>
             {dataObject.data.LatestProducts.bestSellerProducts.filter((filterdObject, index) => index < 4).map((object) => {
               return (
                 <Card key={object._id}
                   sx={{
                     '&:hover .MuiCardContent-root': {
                       color: theme.palette.primary.light,
-                      backgroundColor: '#2F1AC4',
+                      backgroundColor: theme.palette.secondary.main,
                       cursor: "pointer"
                     },
                     '&:hover .MuiTypography-caption': {
-                      color: theme.palette.primary.main,
+                      color: theme.palette.text.tertiary,
                       // backgroundColor: '#2F1AC4',
                       cursor: "pointer"
                     },
@@ -173,7 +173,7 @@ const Home = () => {
                       image={object.display_pic}
                       title="Card Image"
                       sx={{
-                        backgroundColor: '#F6F7FB', objectFit: 'contain', height: '30vh', width: '100%'
+                        backgroundColor: '#F6F7FB', objectFit: 'contain', height: '28vh', width: '100%'
                       }}
                     />
                     <CardContent style={{ padding: '5px', display: 'flex', flexDirection: 'column', alignItems: 'center' }}>

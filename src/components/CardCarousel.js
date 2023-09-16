@@ -29,7 +29,7 @@ function CardCarousel({ data, cardPanelType }) {
     } else if (isMdMatch) {
         cardMediaStyle = { height: '20vh' };
     }
-    let cardsLength
+    let cardsLength;
     if (cardPanelType === 'MultiPanelCardCarousel') {
         cardsLength = isLgUpMatch ? 4 : isXsDownMatch ? 1 : isSmMatch ? 2 : isMdMatch ? 3 : 1;
     } else if (cardPanelType === 'OfferOfTheDay') {

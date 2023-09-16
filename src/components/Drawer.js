@@ -9,32 +9,32 @@ import {
   Button,
   Divider,
   ListItem,
-  useTheme
+  useTheme,
 } from "@mui/material";
 import MenuIcon from "@mui/icons-material/Menu";
 import { Link } from "react-router-dom";
-import PersonOutlineOutlinedIcon from '@mui/icons-material/PersonOutlineOutlined';
-import ShoppingCartOutlinedIcon from '@mui/icons-material/ShoppingCartOutlined';
-import BookmarkAddOutlinedIcon from '@mui/icons-material/BookmarkAddOutlined';
+import PersonOutlineOutlinedIcon from "@mui/icons-material/PersonOutlineOutlined";
+import ShoppingCartOutlinedIcon from "@mui/icons-material/ShoppingCartOutlined";
+import BookmarkAddOutlinedIcon from "@mui/icons-material/BookmarkAddOutlined";
 // const pages = ["Home", "Products", "About Us", "Contact Us"];
 const pages = [
   {
     name: "Home",
-    path: '/home'
+    path: "/home",
   },
   {
     name: "Products",
-    path: '/products'
+    path: "/products",
   },
   {
     name: "About Us",
-    path: '/aboutUs'
+    path: "/aboutUs",
   },
   {
     name: "Contact Us",
-    path: '/contactUs'
-  }
-]
+    path: "/contactUs",
+  },
+];
 const DrawerComp = () => {
   const [openDrawer, setOpenDrawer] = useState(false);
   const theme = useTheme();
@@ -45,24 +45,49 @@ const DrawerComp = () => {
         open={openDrawer}
         onClose={() => setOpenDrawer(false)}
       >
-        <List sx={{ width: '60vw', backgroundColor: theme.palette.secondary.main }}>
-          <ListItem >
-            <Button component={Link} to={'/login'} style={{ alignItems: 'left' }} sx={{
-              color: theme.palette.primary.light, borderColor: theme.palette.primary.light,
-              transition: 'box-shadow 0.3s', // Adding a smooth transition for the hover effect
-              '&:hover': {
+        <List
+          sx={{ width: "60vw", backgroundColor: theme.palette.secondary.main }}
+        >
+          <ListItem>
+            <Button
+              component={Link}
+              to={"/login"}
+              style={{ alignItems: "left" }}
+              sx={{
+                color: theme.palette.primary.light,
                 borderColor: theme.palette.primary.light,
-                boxShadow: '4px 4px 8px rgba(0, 0, 0, 0.3)', // Shadow on hover
-              },
-            }} variant="outlined" startIcon={<PersonOutlineOutlinedIcon />} onClick={() => setOpenDrawer(false)}>
+                transition: "box-shadow 0.3s", // Adding a smooth transition for the hover effect
+                "&:hover": {
+                  borderColor: theme.palette.primary.light,
+                  boxShadow: "4px 4px 8px rgba(0, 0, 0, 0.3)", // Shadow on hover
+                },
+              }}
+              variant="outlined"
+              startIcon={<PersonOutlineOutlinedIcon />}
+              onClick={() => setOpenDrawer(false)}
+            >
               Login
             </Button>
           </ListItem>
-          <ListItem sx={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-start' }}>
-            <Button sx={{ color: theme.palette.primary.light }} variant="text" startIcon={<BookmarkAddOutlinedIcon />}>
+          <ListItem
+            sx={{
+              display: "flex",
+              flexDirection: "column",
+              alignItems: "flex-start",
+            }}
+          >
+            <Button
+              sx={{ color: theme.palette.primary.light }}
+              variant="text"
+              startIcon={<BookmarkAddOutlinedIcon />}
+            >
               Wishlist
             </Button>
-            <Button sx={{ color: theme.palette.primary.light }} variant="text" startIcon={<ShoppingCartOutlinedIcon />}>
+            <Button
+              sx={{ color: theme.palette.primary.light }}
+              variant="text"
+              startIcon={<ShoppingCartOutlinedIcon />}
+            >
               Cart
             </Button>
           </ListItem>
@@ -70,7 +95,19 @@ const DrawerComp = () => {
         <Divider />
         <List>
           {pages.map((page, index) => (
-            <ListItemButton key={index} component={Link} to={page.path} onClick={() => setOpenDrawer(false)}>
+            <ListItemButton
+              sx={{
+                "&:hover .MuiTypography-body1": {
+                  color: theme.palette.primary.main,
+                  // backgroundColor: theme.palette.secondary.main,
+                  cursor: "pointer",
+                },
+              }}
+              key={index}
+              component={Link}
+              to={page.path}
+              onClick={() => setOpenDrawer(false)}
+            >
               <ListItemIcon>
                 <ListItemText>{page.name}</ListItemText>
               </ListItemIcon>

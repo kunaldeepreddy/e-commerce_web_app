@@ -7,11 +7,11 @@ const MultiPanelCardCarousel = ({cardObject, cardMediaStyle}) => {
           sx={{
             '&:hover .MuiCardContent-root': {
               color: theme.palette.primary.light,
-              backgroundColor: '#2F1AC4',
+              backgroundColor: theme.palette.secondary.main,
               cursor: "pointer"
             },
             '&:hover .MuiTypography-caption': {
-              color: theme.palette.primary.main,
+              color: theme.palette.text.tertiary,
               // backgroundColor: '#2F1AC4',
               cursor: "pointer"
             },

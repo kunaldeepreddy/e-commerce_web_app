@@ -25,7 +25,7 @@ const HomeCarousel = (props) => {
             lg: 30,
             md: 20,
             sm: 15
-          }}}>Best Furniture For Your Castle....</Typography>
+          }}}>Best Furniture For Your Home....</Typography>
           <Typography variant="h5" color="black" sx={{fontSize: {
             lg: 30,
             md: 20,
@@ -58,7 +58,7 @@ const HomeCarousel = (props) => {
           height: 'auto',
         }} />
       </Grid>
-      <Grid item xs={2}></Grid>
+      <Grid item xs={1}></Grid>
     </Grid>
   );
 }

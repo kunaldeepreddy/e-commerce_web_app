@@ -17,11 +17,11 @@ const Footer = () => {
           height: 'auto'
         }} />
       </Box>
-        <Container disableGutters style={{fontSize:'14px'}} sx={{bgcolor: "#EEEFFB", color: theme.palette.text.secondary, paddingTop: "2rem" }}>
+        <Container disableGutters maxWidth={false}  style={{fontSize:'14px'}} sx={{bgcolor: "#EEEFFB", color: theme.palette.text.secondary, paddingTop: "2rem" }}>
             <Grid container spacing={1} >
                 <Grid item sm={1.75}></Grid>
                 <Grid item xs={12} sm={3}sx={{ display: 'flex', flexDirection:'column', alignItems: 'flex-start', justifyContent: 'space-between' }}>
-                    <Typography color={theme.palette.text.primary} variant="h5">Hekto</Typography>
+                    <Typography color={theme.palette.text.primary} variant="h5">Homely Haven</Typography>
                     <TextField
                       hiddenLabel
                       placeholder="Enter Email Address"

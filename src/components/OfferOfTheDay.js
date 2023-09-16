@@ -5,7 +5,7 @@ const OfferOfTheDay = ({ cardObject, cardMediaStyle }) => {
     <>
       <Box sx={{
         '&:hover .MuiPaper-root': {
-          boxShadow: '-5px 5px  #9877E7', // Add a box shadow on hover
+          boxShadow: `-5px 5px  ${theme.palette.primary.main}`, // Add a box shadow on hover
         }
       }}>
         <Card key={cardObject._id}

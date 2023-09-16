@@ -13,7 +13,7 @@ function CardsPanel({ data, actualDataLength}) {
     const isLgUpMatch = useMediaQuery(theme.breakpoints.up("900"));
     var cardMediaStyle = {};
     if (isLgUpMatch) {
-        cardMediaStyle = { height: '25vh', width: '18vw' };
+        cardMediaStyle = { height: '25vh', width: '16vw' };
     } else if (isXsDownMatch) {
         cardMediaStyle = { height: '40vh', width: '70vw' };
     } else if (isSmMatch) {
@@ -35,11 +35,11 @@ function CardsPanel({ data, actualDataLength}) {
                                     sx={{
                                         '&:hover .MuiCardContent-root': {
                                             color: theme.palette.primary.light,
-                                            backgroundColor: '#2F1AC4',
+                                            backgroundColor: theme.palette.secondary.main,
                                             cursor: "pointer"
                                         },
                                         '&:hover .MuiTypography-caption': {
-                                            color: theme.palette.primary.main,
+                                            color: theme.palette.text.tertiary,
                                             cursor: "pointer"
                                         },
                                         '&:hover .MuiTypography-subtitle1': {

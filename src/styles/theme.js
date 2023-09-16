@@ -4,7 +4,7 @@ const theme = createTheme({
   palette: {
     primary: {
       // light: '#f37920',
-      main: '#FB2E86',
+      main: '#db8741',  //6a8c64
       dark: "#42403e",
       light: "#ffffff",
       //contrastText: '#f37920'
@@ -12,19 +12,37 @@ const theme = createTheme({
       //'#7E33E0', //violet
       // "#FB2E86", //pink
       // "#ffffbb", //white
+
+      //theme 2 
+      // main: '#d68d7c',
+      // dark: "#42403e",
+      // light: "#ffffff",
     },
     secondary: {
       // light: '#0066ff',
-      main: '#7E33E0', //violet
+      main: '#006d7a', //violet
       // dark: will be calculated from palette.secondary.main,
       // contrastText: '#ffcc00',
+
+      //theme 2 
+      //main: '#464062', 
     },
     error: {
       main: '#ff0000',
     },
     text: {
-      primary: '#0D0E43',//changed the hover color have to check it
-      secondary: '#8A8FB9'
+      primary: '#4484a8',//changed the hover color have to check it e9c78e
+      secondary: '#8A8FB9',
+      tertiary: '#f7ac6e'
+
+      //theme 2 
+      // primary: '#D1B000',//changed the hover color have to check it e9c78e
+      // secondary: '#8A8FB9'
+    },
+  },
+  typography: {
+    caption1: {
+      fontSize: '0.6rem',  // Define your custom caption font siz// Define your custom caption font weight
     },
   },
   shape: {
@@ -49,7 +67,7 @@ const theme = createTheme({
       styleOverrides: {
         root: {
           '&:hover': {
-            color: '#FB2E86',
+            color: '#6a8c64',
             textDecoration: "none",
             cursor: "pointer"
           },
