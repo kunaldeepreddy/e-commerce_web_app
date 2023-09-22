@@ -10,7 +10,8 @@ import {
   InputAdornment,
   IconButton,
 } from "@mui/material";
-import LoadingButton from '@mui/lab/LoadingButton';
+import { useSnackbar } from "notistack";
+import LoadingButton from "@mui/lab/LoadingButton";
 import { useNavigate } from "react-router-dom";
 import users from "../data/users";
 import authService from "./../service/authService";
@@ -32,11 +33,9 @@ export default function Login(props) {
   const [shakeEmailError, setShakeEmailError] = useState();
   const [shakePasswordError, setShakePasswordError] = useState();
   const [showInvalidCredentials, setShowInvalidCredentials] = useState(false);
-
-  // useEffect(() => {
-  //   setAccount({ email: "", password: "" });
-  // });
   const [showPassword, setShowPassword] = useState(false);
+
+  const { enqueueSnackbar, closeSnackbar } = useSnackbar();
   const handleClickShowPassword = () => setShowPassword(!showPassword);
   const handleMouseDownPassword = () => setShowPassword(!showPassword);
 
@@ -66,6 +65,13 @@ export default function Login(props) {
             setShowInvalidCredentials(false);
             authService.doLogIn(account.email);
             setAccount({ email: "", password: "" });
+            enqueueSnackbar("logged in successfully", {
+              variant: "success",
+              anchorOrigin: {
+                vertical: "bottom",
+                horizontal: "right",
+              },
+            });
             navigate("/home");
           } else {
             setShowInvalidCredentials(true);
