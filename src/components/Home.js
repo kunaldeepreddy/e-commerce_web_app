@@ -1,12 +1,10 @@
 import React, { useState } from "react";
 import { CardActionArea, CardContent, CardMedia, Container, Card, ListItemIcon, ListItem, ListSubheader, List, Grid, Box, Typography, useTheme, Backdrop, IconButton, InputAdornment, Button, TextField } from "@mui/material";
 import CircularProgress from '@mui/material/CircularProgress';
-import dataObject from '../utils/data.json';
 import Carousel from 'react-material-ui-carousel'
 // import sofaImage from '../assets/sofa promotional header.png'
 // import HomeSofaImage from '../assets/Home-Stylish-Club-Sofa.png'
 import CircleIcon from '@mui/icons-material/Circle';
-import sofaChairImage from '../assets/Group 153.png';
 import homeContainerImage from '../assets/home-container-image.avif';
 import HomeCarousel from "./HomeCarousel.js";
 import CardCarousel from "./CardCarousel.js";
@@ -17,12 +15,11 @@ const Home = () => {
   const theme = useTheme();
   const { data: homePageConfigData, isFetching, error : homePageError } = useHomePageConfigQuery();
   // console.log(dataObject);
-  const homeCauroselPics = () => {
+  const homeCarouselPics = () => {
     return homePageConfigData.data.carouselProducts.carouselPics.map((item) => {
       return <HomeCarousel key={item._id} image={item.display_pic} lampImage={homePageConfigData.data.carouselProducts.lampImage} />
     });
   }
-
   return (
     <>
     {isFetching ? (
@@ -86,7 +83,7 @@ const Home = () => {
             // textAligh: "left" // 4
           }
         }}>
-        {homeCauroselPics()}
+        {homeCarouselPics()}
       </Carousel>
       <Typography color="#1A0B5B" variant="h5" sx={{ fontWeight: 800, textAlign: 'center', padding: '1em 0 1em 0' }}>Featured Products</Typography>
       <CardCarousel data={homePageConfigData.data.homePageProducts.featuredProducts} cardPanelType='MultiPanelCardCarousel' />

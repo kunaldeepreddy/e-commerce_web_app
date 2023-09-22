@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   AppBar,
   Button,
@@ -18,14 +18,23 @@ import SearchIcon from "@mui/icons-material/Search";
 import PersonOutlineOutlinedIcon from "@mui/icons-material/PersonOutlineOutlined";
 import ShoppingCartOutlinedIcon from "@mui/icons-material/ShoppingCartOutlined";
 import { Link } from "react-router-dom";
-// import { AiOutlineSearch } from 'react-icons/ai';
 import DrawerComp from "./Drawer";
 const Header = (props) => {
   const [value, setValue] = useState(0);
+  useEffect(() => {
+    const pathToValue = {
+      '/home': 0,
+      '/products': 1,
+      '/aboutUs': 2,
+      '/contactUs': 3,
+    };
+    const defaultValue = 0; 
+    const value = pathToValue[window.location.pathname] || defaultValue;
+    setValue(value);
+  }, []);
+  
   const theme = useTheme();
-  // console.log(theme);
   const isMatch = useMediaQuery(theme.breakpoints.down("md"));
-  // console.log(isMatch);
   const isSmallScreenMatch = useMediaQuery(theme.breakpoints.down(350));
 
   return (
@@ -58,7 +67,11 @@ const Header = (props) => {
                 </Grid>
                 {!isSmallScreenMatch ? (
                   <Grid item xs={3}>
-                    <Typography align="center" color={theme.palette.text.tertiary} sx={{ typography: { sm: 'body1', xs: 'body2' } }}>
+                    <Typography
+                      align="center"
+                      color={theme.palette.text.tertiary}
+                      sx={{ typography: { sm: "body1", xs: "body2" } }}
+                    >
                       Homely Haven
                     </Typography>
                   </Grid>
@@ -187,7 +200,10 @@ const Header = (props) => {
                 >
                   <Grid item xs={1.5}></Grid>
                   <Grid item xs={1.5}>
-                    <Typography color={theme.palette.text.primary} sx={{ typography: { md: 'body1', lg: 'h6' } }}>
+                    <Typography
+                      color={theme.palette.text.primary}
+                      sx={{ typography: { md: "body1", lg: "h6" } }}
+                    >
                       Homely Haven
                     </Typography>
                   </Grid>
@@ -251,11 +267,11 @@ const Header = (props) => {
                     <TextField
                       hiddenLabel
                       sx={{
-                        width:"100%",
+                        width: "100%",
                         fieldset: { borderColor: "#b6b6bf" },
                         justifyContent: "center",
                         paddingTop: "3px",
-                        paddingLeft: '5%',
+                        paddingLeft: "5%",
                         "& .MuiInputBase-input": {
                           fontSize: "0.8rem",
                           padding: "8px 8px",

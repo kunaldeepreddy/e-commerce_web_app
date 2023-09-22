@@ -1,6 +1,4 @@
 import { Container, Grid, Box, Typography, useTheme, IconButton, InputAdornment, Button, TextField } from "@mui/material";
-//  import sofaImage from '../../public/assets/image 32.png'
-import lampImage from '../assets/image 32.png'
 
 const HomeCarousel = ({image, lampImage}) => {
   const theme = useTheme();
