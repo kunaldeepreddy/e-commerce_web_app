@@ -17,7 +17,7 @@ import {
 import TabPanel from "../utils/TabPanel";
 import SwipeableViews from 'react-swipeable-views';
 import CardsPanel from "./CardsPanel.js";
-const LatestProducts = (props) => {
+const LatestProducts = ({homePageProducts}) => {
     const theme = useTheme();
     const [productTypeValue, setProductTypeValue] = useState(0);
     var actualDataLength = 6;
@@ -49,16 +49,16 @@ const LatestProducts = (props) => {
                 onChangeIndex={handleChangeIndex}
             >
                 <TabPanel value={productTypeValue} index={0}>
-                    <CardsPanel data={props.dataObject.data.LatestProducts.NewArrivalProducts} actualDataLength={actualDataLength} />
+                    <CardsPanel data={homePageProducts.newArrivalProducts} actualDataLength={actualDataLength} />
                 </TabPanel>
                 <TabPanel value={productTypeValue} index={1}>
-                    <CardsPanel data={props.dataObject.data.LatestProducts.bestSellerProducts} actualDataLength={actualDataLength} />
+                    <CardsPanel data={homePageProducts.bestSellerProducts} actualDataLength={actualDataLength} />
                 </TabPanel>
                 <TabPanel value={productTypeValue} index={2}>
-                    <CardsPanel data={props.dataObject.data.LatestProducts.FeaturedProducts} actualDataLength={actualDataLength} />
+                    <CardsPanel data={homePageProducts.featuredProducts} actualDataLength={actualDataLength} />
                 </TabPanel>
                 <TabPanel value={productTypeValue} index={3}>
-                    <CardsPanel data={props.dataObject.data.LatestProducts.specialOfferProducts} actualDataLength={actualDataLength} />
+                    <CardsPanel data={homePageProducts.specialOfferProducts} actualDataLength={actualDataLength} />
                 </TabPanel>
             </SwipeableViews>
         </>

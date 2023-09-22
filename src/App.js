@@ -1,6 +1,5 @@
-import logo from './logo.svg';
 import './App.css';
-import Header from './components/Header.js'
+import React from "react";
 import Layout from './components/Layout.js'
 import { ThemeProvider , CssBaseline} from '@mui/material';
 import theme from './styles/theme.js';

@@ -47,8 +47,8 @@ function CardCarousel({ data, cardPanelType }) {
                             <Grid item xs={8} sx={{ display: 'flex', flexDirection: "row", justifyContent: "space-around", gap: '15px' }}>
                                 {data.slice(i, i + sliderItems).map((cardObject, index) => {
                                     return cardPanelType === 'OfferOfTheDay' ?
-                                        (<OfferOfTheDay cardMediaStyle={cardMediaStyle} cardObject={cardObject} />) :
-                                        (<MultiPanelCardCarousel cardMediaStyle={cardMediaStyle} cardObject={cardObject} />)
+                                        (<OfferOfTheDay cardMediaStyle={cardMediaStyle} cardObject={cardObject} key={cardObject._id} />) :
+                                        (<MultiPanelCardCarousel cardMediaStyle={cardMediaStyle} cardObject={cardObject} key={cardObject._id} />)
                                 })}
                             </Grid>
                             <Grid item xs={2}>
@@ -67,7 +67,7 @@ function CardCarousel({ data, cardPanelType }) {
                     duration='500'
                     interval='4000'
                     swipe={true}
-                    autoPlay={true}
+                    autoPlay={false}
                     indicatorIconButtonProps={{
                         style: {// 1
                             // width: '10px',

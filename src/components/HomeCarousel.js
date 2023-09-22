@@ -2,7 +2,7 @@ import { Container, Grid, Box, Typography, useTheme, IconButton, InputAdornment,
 //  import sofaImage from '../../public/assets/image 32.png'
 import lampImage from '../assets/image 32.png'
 
-const HomeCarousel = (props) => {
+const HomeCarousel = ({image, lampImage}) => {
   const theme = useTheme();
   return (
     <Grid container sx={{ height: '20%', width: '100vw', minHeight: '20%', backgroundColor: "#F2F0FF", paddingTop: '4px', paddingBottom: '3px' }}>
@@ -52,7 +52,7 @@ const HomeCarousel = (props) => {
         </Box>
       </Grid>
       <Grid item xs={4}>
-        <img src={props.image} alt="funrniture Image" style={{
+        <img src={image} alt="funrniture Image" style={{
           // objectFit: "cover"
           maxWidth: '100%',
           height: 'auto',
