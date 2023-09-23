@@ -15,7 +15,8 @@ import {
     Icon,
 } from "@mui/material";
 import TabPanel from "../utils/TabPanel";
-import SwipeableViews from 'react-swipeable-views';
+// import SwipeableViews from 'react-swipeable-views';
+import SwipeableViews from "react-swipeable-views-react-18-fix";
 import CardsPanel from "./CardsPanel.js";
 const LatestProducts = ({homePageProducts}) => {
     const theme = useTheme();
