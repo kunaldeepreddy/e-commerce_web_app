@@ -10,10 +10,11 @@ import {
   InputAdornment,
   IconButton,
 } from "@mui/material";
+import { useDispatch } from 'react-redux';
+import { loginSuccess } from '../store';
 import { useSnackbar } from "notistack";
 import LoadingButton from "@mui/lab/LoadingButton";
 import { useNavigate } from "react-router-dom";
-import users from "../data/users";
 import authService from "./../service/authService";
 import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
 import VisibilityIcon from "@mui/icons-material/Visibility";
@@ -26,7 +27,7 @@ export default function Login(props) {
   const theme = useTheme();
   const navigate = useNavigate();
   const [userLogin, loginData] = useUserLoginMutation();
-  // console.log(useUserLoginMutation());
+  // console.log(loginData);
   const [account, setAccount] = useState({ email: "", password: "" });
   const [passwordError, setPasswordError] = useState(false);
   const [emailError, setEmailError] = useState(false);
@@ -34,7 +35,7 @@ export default function Login(props) {
   const [shakePasswordError, setShakePasswordError] = useState();
   const [showInvalidCredentials, setShowInvalidCredentials] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
-
+  const dispatch = useDispatch();
   const { enqueueSnackbar, closeSnackbar } = useSnackbar();
   const handleClickShowPassword = () => setShowPassword(!showPassword);
   const handleMouseDownPassword = () => setShowPassword(!showPassword);
@@ -46,7 +47,7 @@ export default function Login(props) {
     setAccount(accountCopy);
   };
 
-  const isVerifiedUser = useCallback(async (email, password) => {
+  const isVerifiedUser = (async (email, password) => {
     let isEmailValid = Validator(email, EMAIL_RULE);
     let isPasswordValid = Validator(password, DEFAULT_RULE);
     setEmailError(!isEmailValid);
@@ -63,7 +64,8 @@ export default function Login(props) {
           console.log(response);
           if (response && response.status === true) {
             setShowInvalidCredentials(false);
-            authService.doLogIn(account.email);
+            authService.doLogIn(account.email, response.data);
+            dispatch(loginSuccess(response.data))
             setAccount({ email: "", password: "" });
             enqueueSnackbar("logged in successfully", {
               variant: "success",

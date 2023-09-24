@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useMemo } from "react";
 import {
   AppBar,
   Button,
@@ -13,29 +13,50 @@ import {
   IconButton,
   Grid,
   Icon,
+  Avatar,
+  Popover,
 } from "@mui/material";
+import { useSelector, useDispatch } from "react-redux";
+import authService from "./../service/authService";
 import SearchIcon from "@mui/icons-material/Search";
 import PersonOutlineOutlinedIcon from "@mui/icons-material/PersonOutlineOutlined";
 import ShoppingCartOutlinedIcon from "@mui/icons-material/ShoppingCartOutlined";
+import { createAvatar } from "@dicebear/core";
+import { avataaarsNeutral } from "@dicebear/collection";
 import { Link } from "react-router-dom";
 import DrawerComp from "./Drawer";
+import PopupState, {
+  bindTrigger,
+  bindPopover,
+} from 'material-ui-popup-state';
+
 const Header = (props) => {
   const [value, setValue] = useState(0);
+  const userData = useSelector((state) => state.user);
   useEffect(() => {
     const pathToValue = {
-      '/home': 0,
-      '/products': 1,
-      '/aboutUs': 2,
-      '/contactUs': 3,
+      "/home": 0,
+      "/products": 1,
+      "/aboutUs": 2,
+      "/contactUs": 3,
     };
-    const defaultValue = 0; 
+    const defaultValue = 0;
     const value = pathToValue[window.location.pathname] || defaultValue;
     setValue(value);
   }, []);
-  
+
   const theme = useTheme();
   const isMatch = useMediaQuery(theme.breakpoints.down("md"));
   const isSmallScreenMatch = useMediaQuery(theme.breakpoints.down(350));
+
+  const avatar = useMemo(() => {
+    return createAvatar(avataaarsNeutral, {
+      size: 128,
+      backgroundColor: ["b6e3f4", "c0aede", "d1d4f9", "edb98a"],
+      eyes: ["closed", "wink", "default", "squint", "side", "happy", "hearts"],
+      // ... other options
+    }).toDataUriSync();
+  }, []);
 
   return (
     <React.Fragment>
@@ -140,26 +161,30 @@ const Header = (props) => {
                   }}
                 >
                   <Grid item xs={9}></Grid>
-                  <Grid item xs={1}>
-                    <Button
-                      sx={{
-                        lineHeight: "0",
-                        color: theme.palette.primary.light,
-                      }}
-                      component={Link}
-                      to={"/login"}
-                    >
-                      <Typography
-                        color={theme.palette.primary.light}
-                        variant="caption"
+                  {!userData && !authService.getUserToken() ? (
+                    <Grid item xs={1}>
+                      <Button
+                        sx={{
+                          lineHeight: "0",
+                          color: theme.palette.primary.light,
+                        }}
+                        component={Link}
+                        to={"/login"}
                       >
-                        Login
-                      </Typography>
-                      <Icon>
-                        <PersonOutlineOutlinedIcon />
-                      </Icon>
-                    </Button>
-                  </Grid>
+                        <Typography
+                          color={theme.palette.primary.light}
+                          variant="caption"
+                        >
+                          Login
+                        </Typography>
+                        <Icon>
+                          <PersonOutlineOutlinedIcon />
+                        </Icon>
+                      </Button>
+                    </Grid>
+                  ) : (
+                    ""
+                  )}
                   <Grid item xs={1}>
                     <Button
                       sx={{
@@ -192,6 +217,54 @@ const Header = (props) => {
                       </Button>
                     </Typography>
                   </Grid>
+
+                  {!userData || authService.getUserToken() != undefined ? (
+                    <Grid item xs={1}>
+                      <PopupState
+                        variant="popover"
+                        popupId="demo-popup-popover"
+                      >
+                        {(popupState) => (
+                          <div>
+                            <Button
+                              sx={{
+                                lineHeight: "0",
+                              }}
+                              {...bindTrigger(popupState)}
+                            >
+                              <Avatar
+                                style={{
+                                  border: "0.1px solid grey",
+                                  backgroundColor: "white",
+                                }}
+                                sx={{ width: 35, height: 35 }}
+                                alt="Cindy Baker"
+                                src={avatar}
+                              />
+                            </Button>
+                            <Popover
+                              {...bindPopover(popupState)}
+                              anchorOrigin={{
+                                vertical: "bottom",
+                                horizontal: "center",
+                              }}
+                              transformOrigin={{
+                                vertical: "top",
+                                horizontal: "center",
+                              }}
+                            >
+                              <Typography sx={{ p: 2 }}>
+                                The content of the Popover.
+                              </Typography>
+                            </Popover>
+                          </div>
+                        )}
+                      </PopupState>
+                    </Grid>
+                  ) : (
+                    ""
+                  )}
+                  
                 </Grid>
 
                 <Grid
