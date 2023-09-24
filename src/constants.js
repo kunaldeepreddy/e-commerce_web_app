@@ -5,4 +5,9 @@
 // BASE_URL: process.env.BASE_URL
 // });
 
-export const BASE_URL = `http://localhost:3005/api`
+
+
+const DEV = `http://localhost:3005/api`
+const PROD = 'http://ec2-65-2-121-106.ap-south-1.compute.amazonaws.com:3005/api'
+
+export const BASE_URL = window.location.hostname.split(":")[0] === "localhost" || window.location.hostname.includes("192") ? DEV : PROD;
