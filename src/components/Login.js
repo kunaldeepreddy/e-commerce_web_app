@@ -36,7 +36,7 @@ export default function Login(props) {
   const [showInvalidCredentials, setShowInvalidCredentials] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
   const dispatch = useDispatch();
-  const { enqueueSnackbar, closeSnackbar } = useSnackbar();
+  const { enqueueSnackbar } = useSnackbar();
   const handleClickShowPassword = () => setShowPassword(!showPassword);
   const handleMouseDownPassword = () => setShowPassword(!showPassword);
 
@@ -61,7 +61,7 @@ export default function Login(props) {
       userLogin(account)
         .unwrap()
         .then((response) => {
-          console.log(response);
+          // console.log(response);
           if (response && response.status === true) {
             setShowInvalidCredentials(false);
             authService.doLogIn(account.email, response.data);

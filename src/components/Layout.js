@@ -1,5 +1,6 @@
 import React, { Suspense, lazy } from "react";
 import Login from "./Login.js";
+import Register from "./Register.js";
 import { Backdrop, useTheme } from "@mui/material";
 import CircularProgress from '@mui/material/CircularProgress';
 // import Header from "./Header.js";
@@ -33,6 +34,7 @@ const Layout = () => {
           <Route path="/AboutUs" element={<AboutUs />} />
           <Route path="/ContactUs" element={<ContactUs />} />
           <Route path="/login" element={<Login />} />
+          <Route path="/register" element={<Register />} />
           <Route path="/" element={<Navigate to="/home" />} />
           <Route path="*" element={<NotFound />} />
         </Routes>

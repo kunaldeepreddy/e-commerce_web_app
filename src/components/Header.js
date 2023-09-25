@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useMemo } from "react";
+import React, { useState, useEffect } from "react";
 import {
   AppBar,
   Button,
@@ -13,26 +13,29 @@ import {
   IconButton,
   Grid,
   Icon,
-  Avatar,
-  Popover,
+  Menu,
+  MenuItem,
 } from "@mui/material";
+import { logout } from "../store";
+import { useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
+import { useSnackbar } from "notistack";
 import authService from "./../service/authService";
 import SearchIcon from "@mui/icons-material/Search";
 import PersonOutlineOutlinedIcon from "@mui/icons-material/PersonOutlineOutlined";
 import ShoppingCartOutlinedIcon from "@mui/icons-material/ShoppingCartOutlined";
-import { createAvatar } from "@dicebear/core";
-import { avataaarsNeutral } from "@dicebear/collection";
 import { Link } from "react-router-dom";
 import DrawerComp from "./Drawer";
-import PopupState, {
-  bindTrigger,
-  bindPopover,
-} from 'material-ui-popup-state';
+import useGetUserAvatar from "../hooks/useGetUserAvatar";
 
 const Header = (props) => {
   const [value, setValue] = useState(0);
-  const userData = useSelector((state) => state.user);
+  const userData = useSelector((state) => state.user.user);
+  // console.log(userData);
+
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const { enqueueSnackbar } = useSnackbar();
   useEffect(() => {
     const pathToValue = {
       "/home": 0,
@@ -45,18 +48,40 @@ const Header = (props) => {
     setValue(value);
   }, []);
 
+  const [anchorEl, setAnchorEl] = React.useState(null);
+  const open = Boolean(anchorEl);
+  const handleUserButtonClick = (event) => {
+    setAnchorEl(event.currentTarget);
+  };
+  const handleUserButtonClose = () => {
+    setAnchorEl(null);
+  };
+
+  const handleLogoutClose = () => {
+    authService.logOut();
+    dispatch(logout());
+    enqueueSnackbar("logged out successfully", {
+      variant: "success",
+      anchorOrigin: {
+        vertical: "bottom",
+        horizontal: "right",
+      },
+    });
+    navigate("/login");
+    setAnchorEl(null);
+  };
+
   const theme = useTheme();
-  const isMatch = useMediaQuery(theme.breakpoints.down("md"));
+  const isMatch = useMediaQuery(theme.breakpoints.down(800));
   const isSmallScreenMatch = useMediaQuery(theme.breakpoints.down(350));
 
-  const avatar = useMemo(() => {
-    return createAvatar(avataaarsNeutral, {
-      size: 128,
-      backgroundColor: ["b6e3f4", "c0aede", "d1d4f9", "edb98a"],
-      eyes: ["closed", "wink", "default", "squint", "side", "happy", "hearts"],
-      // ... other options
-    }).toDataUriSync();
-  }, []);
+  const tabStyle = {
+    minWidth: { xs: 50 },
+    paddingLeft: { xs: 0 },
+    paddingRight: { xs: 0 },
+  };
+
+  const { userAvatar } = useGetUserAvatar(32, userData?._id);
 
   return (
     <React.Fragment>
@@ -160,13 +185,24 @@ const Header = (props) => {
                     paddingBottom: "3px",
                   }}
                 >
-                  <Grid item xs={9}></Grid>
-                  {!userData && !authService.getUserToken() ? (
-                    <Grid item xs={1}>
+                  {!userData?.user && !authService.getUserToken() ? (
+                    <>
+                    <Grid item xs={8} md={9} ></Grid>
+                    <Grid item xs={4} md={3} sx={{display:"flex", flexDirection:"row",gap:"5%", flexWrap:"nowrap", justifyContent:"center"}}>
                       <Button
                         sx={{
                           lineHeight: "0",
-                          color: theme.palette.primary.light,
+                          width: '30%',
+                          backgroundColor: theme.palette.secondary.main,
+                          borderRadius: "2px",
+                          justifyContent:"center",
+                          "&:hover": {
+                            backgroundColor: theme.palette.primary.light,
+                            borderColor: theme.palette.primary.light,
+                          },
+                          "&:hover .MuiTypography-root": {
+                            color: theme.palette.text.tertiary
+                          }
                         }}
                         component={Link}
                         to={"/login"}
@@ -175,96 +211,149 @@ const Header = (props) => {
                           color={theme.palette.primary.light}
                           variant="caption"
                         >
-                          Login
+                          Log In
                         </Typography>
-                        <Icon>
+                        {/* <Icon>
                           <PersonOutlineOutlinedIcon />
-                        </Icon>
+                        </Icon> */}
                       </Button>
-                    </Grid>
-                  ) : (
-                    ""
-                  )}
-                  <Grid item xs={1}>
-                    <Button
-                      sx={{
-                        lineHeight: "0",
-                        color: theme.palette.primary.light,
-                      }}
-                    >
-                      <Typography
-                        color={theme.palette.primary.light}
-                        variant="caption"
-                      >
-                        Wishlist
-                      </Typography>
-                    </Button>
-                  </Grid>
-                  <Grid item xs={1}>
-                    <Typography
-                      color={theme.palette.primary.light}
-                      variant="caption"
-                    >
                       <Button
                         sx={{
                           lineHeight: "0",
-                          color: theme.palette.primary.light,
+                          width: '30%',
+                          backgroundColor: theme.palette.secondary.main,
+                          borderRadius: "2px",
+                          justifyContent:"center",
+                          "&:hover": {
+                            backgroundColor: theme.palette.primary.light,
+                            borderColor: theme.palette.primary.light,
+                          },
+                          "&:hover .MuiTypography-root": {
+                            color: theme.palette.text.tertiary
+                          }
                         }}
+                        component={Link}
+                        to={"/register"}
                       >
-                        <Icon>
-                          <ShoppingCartOutlinedIcon />
-                        </Icon>
+                        <Typography
+                          color={theme.palette.primary.light}
+                          variant="caption"
+                        >
+                          Sign Up
+                        </Typography>
+                        {/* <Icon>
+                          <PersonOutlineOutlinedIcon />
+                        </Icon> */}
                       </Button>
-                    </Typography>
-                  </Grid>
-
-                  {!userData || authService.getUserToken() != undefined ? (
-                    <Grid item xs={1}>
-                      <PopupState
-                        variant="popover"
-                        popupId="demo-popup-popover"
-                      >
-                        {(popupState) => (
-                          <div>
-                            <Button
-                              sx={{
-                                lineHeight: "0",
-                              }}
-                              {...bindTrigger(popupState)}
-                            >
-                              <Avatar
-                                style={{
-                                  border: "0.1px solid grey",
-                                  backgroundColor: "white",
-                                }}
-                                sx={{ width: 35, height: 35 }}
-                                alt="Cindy Baker"
-                                src={avatar}
-                              />
-                            </Button>
-                            <Popover
-                              {...bindPopover(popupState)}
-                              anchorOrigin={{
-                                vertical: "bottom",
-                                horizontal: "center",
-                              }}
-                              transformOrigin={{
-                                vertical: "top",
-                                horizontal: "center",
-                              }}
-                            >
-                              <Typography sx={{ p: 2 }}>
-                                The content of the Popover.
-                              </Typography>
-                            </Popover>
-                          </div>
-                        )}
-                      </PopupState>
                     </Grid>
+                    </>
                   ) : (
                     ""
                   )}
-                  
+                  {userData?.user || authService.getUserToken() != undefined ? (
+                    <>
+                    {/* <Grid item xs={9}></Grid>
+                      <Grid item xs={1}> */}
+                    <Grid item xs={8} md={9} ></Grid>
+                    <Grid item xs={4} md={3} sx={{display:"flex", flexDirection:"row",gap:"10%", flexWrap:"nowrap", placeItems:"center"}}>
+                        <Button
+                           sx={{
+                            width: '30%',
+                            backgroundColor: theme.palette.secondary.main,
+                            borderRadius: "2px",
+                            justifyContent:"center",
+                            "&:hover": {
+                              backgroundColor: theme.palette.primary.light,
+                              borderColor: theme.palette.primary.light,
+                            },
+                            "&:hover .MuiTypography-root": {
+                              color: theme.palette.text.tertiary
+                            }
+                          }}
+                        >
+                          <Typography
+                            color={theme.palette.primary.light}
+                            variant="caption"
+                            sx={{padding:"2px 0 2px 0"}}
+                          >
+                            Wishlist
+                          </Typography>
+                        </Button>
+                      {/* </Grid>
+                      <Grid item xs={1}> */}
+                        <Typography
+                          color={theme.palette.primary.light}
+                          variant="caption"
+                        >
+                          <Button
+                            sx={{
+                              lineHeight: "0",
+                              width: '50%',
+                              backgroundColor: theme.palette.secondary.main,
+                              borderRadius: "2px",
+                              justifyContent:"center",
+                              "&:hover": {
+                                backgroundColor: theme.palette.primary.light,
+                                borderColor: theme.palette.primary.light,
+                              },
+                              "&:hover .MuiSvgIcon-root": {
+                                color: theme.palette.text.tertiary
+                              }
+                            }}
+                          >
+                            <Icon>
+                              <ShoppingCartOutlinedIcon sx={{color:theme.palette.primary.light}}/>
+                            </Icon>
+                          </Button>
+                        </Typography>
+                      {/* </Grid>
+                      <Grid item xs={1}> */}
+                        <Button
+                          sx={{
+                            lineHeight: "0",
+                          }}
+                          id="demo-positioned-button"
+                          aria-controls={
+                            open ? "demo-positioned-menu" : undefined
+                          }
+                          aria-haspopup="true"
+                          aria-expanded={open ? "true" : undefined}
+                          onClick={handleUserButtonClick}
+                          title={userData.name}
+                        >
+                          <img style={{
+                            border:`2px solid ${theme.palette.text.tertiary}`,
+                            padding:"1px",
+                            borderRadius:"50%"
+                          }}src={userAvatar} alt={userData.name} />
+                        </Button>
+                        <Menu
+                          id="demo-positioned-menu"
+                          aria-labelledby="demo-positioned-button"
+                          anchorEl={anchorEl}
+                          open={open}
+                          onClose={handleUserButtonClose}
+                          anchorOrigin={{
+                            vertical: "bottom",
+                            horizontal: "left",
+                          }}
+                          transformOrigin={{
+                            vertical: "top",
+                            horizontal: "left",
+                          }}
+                        >
+                          <MenuItem onClick={handleUserButtonClose}>
+                            Profile
+                          </MenuItem>
+                          <MenuItem onClick={handleLogoutClose}>
+                            Logout
+                          </MenuItem>
+                        </Menu>
+                      </Grid>
+                    </>
+                  ) : (
+                    ""
+                  )}
                 </Grid>
 
                 <Grid
@@ -296,6 +385,7 @@ const Header = (props) => {
                             md: "0.7rem",
                             sm: "0.6rem",
                           },
+                          ...tabStyle,
                         }}
                         label="Home"
                         component={Link}
@@ -307,6 +397,7 @@ const Header = (props) => {
                             md: "0.7rem",
                             sm: "0.6rem",
                           },
+                          ...tabStyle,
                         }}
                         label="Products"
                         component={Link}
@@ -318,6 +409,7 @@ const Header = (props) => {
                             md: "0.7rem",
                             sm: "0.6rem",
                           },
+                          ...tabStyle,
                         }}
                         label="About Us"
                         component={Link}
@@ -329,6 +421,7 @@ const Header = (props) => {
                             md: "0.7rem",
                             sm: "0.6rem",
                           },
+                          ...tabStyle,
                         }}
                         label="Contact Us"
                         component={Link}

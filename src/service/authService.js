@@ -15,11 +15,10 @@ const getUserName = () => {
 
 const logOut = (props) =>{
   localStorage.removeItem("username");
+  localStorage.removeItem("userEmailId");
   localStorage.removeItem("isLoggedIn");
   localStorage.removeItem("userToken");
   localStorage.removeItem("userName");
-  props.history.push("/login");
-
 };
 
 export default {

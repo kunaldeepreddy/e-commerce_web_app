@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { CardActionArea, CardContent, CardMedia, Container, Card, ListItemIcon, ListItem, ListSubheader, List, Grid, Box, Typography, useTheme, Backdrop, IconButton, InputAdornment, Button, TextField } from "@mui/material";
+import { CardActionArea, CardContent, CardMedia, Container, Card, ListItemIcon, ListItem, ListSubheader, List, Grid, Box, Typography, useTheme, Backdrop, useMediaQuery, InputAdornment, Button, TextField } from "@mui/material";
 import CircularProgress from '@mui/material/CircularProgress';
 import Carousel from 'react-material-ui-carousel'
 // import sofaImage from '../assets/sofa promotional header.png'
@@ -15,6 +15,7 @@ const Home = () => {
   const theme = useTheme();
   const { data: homePageConfigData, isFetching, error : homePageError } = useHomePageConfigQuery();
   // console.log(dataObject);
+  const isSmallScreenMatch = useMediaQuery(theme.breakpoints.down("md"));
   const homeCarouselPics = () => {
     return homePageConfigData.data.carouselProducts.carouselPics.map((item) => {
       return <HomeCarousel key={item._id} image={item.display_pic} lampImage={homePageConfigData.data.carouselProducts.lampImage} />
@@ -94,14 +95,20 @@ const Home = () => {
       <Box sx={{ pt: '5px' }}>
         <Grid container sx={{ height: '20%', width: '100vw', minHeight: '20%', backgroundColor: "#F2F0FF", paddingTop: '4px', paddingBottom: '3px' }}>
           <Grid item xs={2}></Grid>
-          <Grid item xs={4}>
+          <Grid item xs={8} md={4}>
             <img src={homePageConfigData.data.carouselProducts.carouselPics[0].display_pic} alt="furniture Image" style={{
               // objectFit: "cover"
               maxWidth: '100%', // Set the maximum width to 100% of its container
               height: 'auto',
             }} />
           </Grid>
-          <Grid item xs={4}>
+          {isSmallScreenMatch ? (
+            <>
+          <Grid item xs={2}></Grid> 
+          <Grid item xs={2}></Grid>
+            </>
+            ) : ''}
+          <Grid item xs={8} md={4} >
             <Typography variant="h4" color='#151875' sx={{ fontWeight: 700 }}>Unique Features Of leatest & Trending Products</Typography>
             <List >
               <ListItem >
