@@ -36,7 +36,7 @@ const Header = (props) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const { enqueueSnackbar } = useSnackbar();
-  const tabRemoveFocusStyle= {};
+
   useEffect(() => {
     const pathToValue = {
       "/home": 0,
@@ -44,14 +44,8 @@ const Header = (props) => {
       "/aboutUs": 2,
       "/contactUs": 3,
     };
-    const value = pathToValue[window.location.pathname] || 0;
-    setValue(value);
-    if(![0,1,2,3].includes(value))
-    {
-      tabRemoveFocusStyle = {
-        '& .MuiTabs-indicator': { display: 'none' }
-      }
-    }
+    const tabValue = pathToValue[window.location.pathname] ?? false;
+    setValue(tabValue);
   }, []);
 
   const [anchorEl, setAnchorEl] = React.useState(null);
@@ -63,6 +57,10 @@ const Header = (props) => {
     setAnchorEl(null);
   };
 
+  const handleUnselectTab = () => {
+    setValue(false)
+  }
+
   const handleLogoutClose = () => {
     authService.logOut();
     dispatch(logout());
@@ -73,6 +71,7 @@ const Header = (props) => {
         horizontal: "right",
       },
     });
+    handleUnselectTab();
     navigate("/login");
     setAnchorEl(null);
   };
@@ -115,7 +114,7 @@ const Header = (props) => {
                 }}
               >
                 <Grid item xs={1}>
-                  <DrawerComp align="right" sx={{ paddingRight: "0" }} />
+                  <DrawerComp handleUnselectTab={handleUnselectTab} align="right" sx={{ paddingRight: "0" }} />
                 </Grid>
                 {!isSmallScreenMatch ? (
                   <Grid item xs={3}>
@@ -210,6 +209,7 @@ const Header = (props) => {
                             color: theme.palette.text.tertiary
                           }
                         }}
+                        onClick={handleUnselectTab}
                         component={Link}
                         to={"/login"}
                       >
@@ -238,6 +238,7 @@ const Header = (props) => {
                             color: theme.palette.text.tertiary
                           }
                         }}
+                        onClick={handleUnselectTab}
                         component={Link}
                         to={"/register"}
                       >
@@ -377,13 +378,13 @@ const Header = (props) => {
                   </Grid>
                   <Grid item xs={5.5} md={4.5}>
                     <Tabs
-                      // indicatorColor="white"
-                      sx={{ "&.MuiButtonBase-root ": { outline: "none" }, ...tabRemoveFocusStyle }}
+                      sx={{ "&.MuiButtonBase-root ": { outline: "none" }}}
                       textColor="primary"
                       value={value}
                       onChange={(e, value) => setValue(value)}
                       variant="fullWidth"
                       centered
+                      // TabIndicatorProps={isPanelOpen ? {} : { style: { display: 'none' } }}
                     >
                       <Tab
                         sx={{

@@ -17,7 +17,6 @@ import {
 } from "@mui/material";
 import MenuIcon from "@mui/icons-material/Menu";
 import { Link } from "react-router-dom";
-import PersonOutlineOutlinedIcon from "@mui/icons-material/PersonOutlineOutlined";
 import LogoutIcon from "@mui/icons-material/Logout";
 import ShoppingCartOutlinedIcon from "@mui/icons-material/ShoppingCartOutlined";
 import BookmarkAddOutlinedIcon from "@mui/icons-material/BookmarkAddOutlined";
@@ -45,7 +44,7 @@ const pages = [
     path: "/contactUs",
   },
 ];
-const DrawerComp = () => {
+const DrawerComp = ({ handleUnselectTab }) => {
   const userData = useSelector((state) => state.user.user);
   // console.log(userData);
   const theme = useTheme();
@@ -67,6 +66,7 @@ const DrawerComp = () => {
       },
     });
     setOpenDrawer(false);
+    handleUnselectTab();
     navigate("/login");
   };
   return (
@@ -118,16 +118,18 @@ const DrawerComp = () => {
                   }}
                   variant="outlined"
                   // startIcon={<PersonOutlineOutlinedIcon />}
-                  onClick={() => setOpenDrawer(false)}
+                  onClick={() => {
+                    setOpenDrawer(false);
+                    handleUnselectTab();
+                  }}
                 >
                   <Typography
+                    noWrap
                     color={theme.palette.primary.light}
                     variant="caption"
                     sx={{
                       textAlign: "center",
                       fontSize: "clamp(0.7rem,5vw,0.8rem)",
-                      whiteSpace: "nowrap",
-                      minWidth: "auto",
                     }}
                   >
                     Log In
@@ -155,16 +157,18 @@ const DrawerComp = () => {
                   variant="outlined"
                   component={Link}
                   to={"/register"}
-                  onClick={() => setOpenDrawer(false)}
+                  onClick={() => {
+                    setOpenDrawer(false);
+                    handleUnselectTab();
+                  }}
                 >
                   <Typography
+                    noWrap
                     color={theme.palette.primary.light}
                     variant="caption"
                     sx={{
                       textAlign: "center",
                       fontSize: "clamp(0.7rem,5vw,0.8rem)",
-                      whiteSpace: "nowrap",
-                      minWidth: "auto",
                     }}
                   >
                     Sign Up

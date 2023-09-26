@@ -197,7 +197,6 @@ export default function Register(props) {
           id="email"
           placeholder="Email Address"
           name="email"
-          autoFocus
           sx={{
             fieldset: { borderColor: "#b6b6bf", borderRadius: "2px" },
             "& .MuiOutlinedInput-input": {
@@ -219,7 +218,6 @@ export default function Register(props) {
           id="mobile_number"
           placeholder="Mobile Number"
           name="mobile_number"
-          autoFocus
           sx={{
             fieldset: { borderColor: "#b6b6bf", borderRadius: "2px" },
             "& .MuiOutlinedInput-input": {
@@ -300,25 +298,6 @@ export default function Register(props) {
           }}
         />
         {/* <FormControlLabel control={<Checkbox value="remember" color="primary" />} label="Remember me" /> */}
-        <Grid container sx={{ alignItems: "center", justifyContent: "center" }}>
-          <Grid item>
-            <Link
-              href="#"
-              variant="caption"
-              underline="none"
-              color="#9096B2"
-              sx={{
-                "&:hover": {
-                  color: theme.palette.primary.main,
-                  textDecoration: "underline",
-                  cursor: "pointer",
-                },
-              }}
-            >
-              "Forgot your password?"
-            </Link>
-          </Grid>
-        </Grid>
         {showInvalidCredentials && (
           <h5 style={{ marginBottom: 0, color: theme.palette.error.main }}>
             Invalid credentials. Please try again.
@@ -346,10 +325,10 @@ export default function Register(props) {
         >
           Sign In
         </LoadingButton>
-        <Grid container>
+        <Grid container sx={{justifyContent:"center"}}>
           <Grid item>
             <Link
-              href="#"
+              href="/login"
               variant="caption"
               underline="none"
               color="#9096B2"
@@ -361,7 +340,7 @@ export default function Register(props) {
                 },
               }}
             >
-              {"Don’t have an Account?Create account"}
+              {"Already have an Account? Log In"}
             </Link>
           </Grid>
         </Grid>

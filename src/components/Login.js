@@ -237,7 +237,7 @@ export default function Login(props) {
         <Grid container>
           <Grid item>
             <Link
-              href="#"
+              href="/register"
               variant="caption"
               underline="none"
               color="#9096B2"
