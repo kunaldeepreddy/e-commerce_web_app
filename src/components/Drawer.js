@@ -13,11 +13,12 @@ import {
   Stack,
   Typography,
   Box,
+  useMediaQuery,
 } from "@mui/material";
 import MenuIcon from "@mui/icons-material/Menu";
 import { Link } from "react-router-dom";
 import PersonOutlineOutlinedIcon from "@mui/icons-material/PersonOutlineOutlined";
-import LogoutIcon from '@mui/icons-material/Logout';
+import LogoutIcon from "@mui/icons-material/Logout";
 import ShoppingCartOutlinedIcon from "@mui/icons-material/ShoppingCartOutlined";
 import BookmarkAddOutlinedIcon from "@mui/icons-material/BookmarkAddOutlined";
 import { logout } from "../store";
@@ -47,12 +48,12 @@ const pages = [
 const DrawerComp = () => {
   const userData = useSelector((state) => state.user.user);
   // console.log(userData);
-
+  const theme = useTheme();
+  const isSmallScreenMatch = useMediaQuery(theme.breakpoints.down(290));
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const { enqueueSnackbar } = useSnackbar();
   const [openDrawer, setOpenDrawer] = useState(false);
-  const theme = useTheme();
   const { userAvatar } = useGetUserAvatar(30, userData?._id);
 
   const handleLogoutClose = () => {
@@ -81,30 +82,98 @@ const DrawerComp = () => {
         >
           <ListItem>
             {!userData?.user && !authService.getUserToken() ? (
-              <Button
-                component={Link}
-                to={"/login"}
-                style={{ marginLeft: "15%" }}
+              <Box
                 sx={{
-                  alignItems: "center",
-                  width: '70%',
-                  color: theme.palette.primary.light,
-                  borderColor: theme.palette.primary.light,
-                  borderRadius: "2px",
-                  // transition: "box-shadow 0.3s", // Adding a smooth transition for the hover effect
-                  "&:hover": {
-                    backgroundColor: theme.palette.primary.light,
-                    color: theme.palette.secondary.main,
-                    borderColor: theme.palette.primary.light,
-                    // boxShadow: "4px 4px 8px rgba(0, 0, 0, 0.3)", // Shadow on hover
-                  },
+                  width: "100%",
+                  height: "100%",
+                  display: "flex",
+                  flexDirection: !isSmallScreenMatch ? "row" : "column",
+                  flexWrap: "wrap",
+                  // justifyContent: "space-between",
+                  gap: "5%",
                 }}
-                variant="outlined"
-                startIcon={<PersonOutlineOutlinedIcon />}
-                onClick={() => setOpenDrawer(false)}
               >
-                Login
-              </Button>
+                <Button
+                  component={Link}
+                  to={"/login"}
+                  // style={{ marginLeft: "15%" }}
+                  sx={{
+                    alignContent: "center",
+                    width: !isSmallScreenMatch ? "45%" : "100%",
+                    minWidth: "40%",
+                    color: theme.palette.primary.light,
+                    borderColor: theme.palette.primary.light,
+                    borderRadius: "2px",
+                    marginBottom: isSmallScreenMatch ? "5%" : 0,
+                    // transition: "box-shadow 0.3s", // Adding a smooth transition for the hover effect
+                    "&:hover": {
+                      backgroundColor: theme.palette.primary.light,
+                      color: theme.palette.secondary.main,
+                      borderColor: theme.palette.primary.light,
+                      // boxShadow: "4px 4px 8px rgba(0, 0, 0, 0.3)", // Shadow on hover
+                    },
+                    "&:hover .MuiTypography-root": {
+                      color: theme.palette.text.tertiary,
+                    },
+                  }}
+                  variant="outlined"
+                  // startIcon={<PersonOutlineOutlinedIcon />}
+                  onClick={() => setOpenDrawer(false)}
+                >
+                  <Typography
+                    color={theme.palette.primary.light}
+                    variant="caption"
+                    sx={{
+                      textAlign: "center",
+                      fontSize: "clamp(0.7rem,5vw,0.8rem)",
+                      whiteSpace: "nowrap",
+                      minWidth: "auto",
+                    }}
+                  >
+                    Log In
+                  </Typography>
+                </Button>
+                <Button
+                  sx={{
+                    alignContent: "center",
+                    width: !isSmallScreenMatch ? "45%" : "100%",
+                    minWidth: "40%",
+                    color: theme.palette.primary.light,
+                    borderColor: theme.palette.primary.light,
+                    borderRadius: "2px",
+                    // transition: "box-shadow 0.3s", // Adding a smooth transition for the hover effect
+                    "&:hover": {
+                      backgroundColor: theme.palette.primary.light,
+                      color: theme.palette.secondary.main,
+                      borderColor: theme.palette.primary.light,
+                      // boxShadow: "4px 4px 8px rgba(0, 0, 0, 0.3)", // Shadow on hover
+                    },
+                    "&:hover .MuiTypography-root": {
+                      color: theme.palette.text.tertiary,
+                    },
+                  }}
+                  variant="outlined"
+                  component={Link}
+                  to={"/register"}
+                  onClick={() => setOpenDrawer(false)}
+                >
+                  <Typography
+                    color={theme.palette.primary.light}
+                    variant="caption"
+                    sx={{
+                      textAlign: "center",
+                      fontSize: "clamp(0.7rem,5vw,0.8rem)",
+                      whiteSpace: "nowrap",
+                      minWidth: "auto",
+                    }}
+                  >
+                    Sign Up
+                  </Typography>
+                  {/* <Icon>
+                <PersonOutlineOutlinedIcon />
+              </Icon> */}
+                </Button>
+              </Box>
             ) : (
               <Stack
                 spacing={{ xs: 1, sm: 2 }}
@@ -121,7 +190,15 @@ const DrawerComp = () => {
                   title="Profile"
                   // onClick={handleUserButtonClick}
                 >
-                  <img src={userAvatar} alt={userData.name} />
+                  <img
+                    style={{
+                      border: `2px solid ${theme.palette.text.tertiary}`,
+                      padding: "1px",
+                      borderRadius: "50%",
+                    }}
+                    src={userAvatar}
+                    alt={userData.name}
+                  />
                 </Button>
                 <Typography
                   color={theme.palette.text.tertiary}
@@ -182,10 +259,14 @@ const DrawerComp = () => {
         </List>
         {userData?.user || authService.getUserToken() != undefined ? (
           <Button
-            style={{ alignItems: "center", position: "absolute", bottom: "2px",}}
+            style={{
+              alignItems: "center",
+              position: "absolute",
+              bottom: "2px",
+            }}
             sx={{
               paddingLeft: "5%",
-              width: '100%',
+              width: "100%",
               color: theme.palette.secondary.main,
               // borderColor: theme.palette.primary.light,
               // transition: "box-shadow 0.3s", // Adding a smooth transition for the hover effect
@@ -201,7 +282,9 @@ const DrawerComp = () => {
           >
             Logout
           </Button>
-        ) : "" }
+        ) : (
+          ""
+        )}
       </Drawer>
       <IconButton
         sx={{ color: "white", marginLeft: "auto" }}

@@ -36,6 +36,7 @@ const Header = (props) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const { enqueueSnackbar } = useSnackbar();
+  const tabRemoveFocusStyle= {};
   useEffect(() => {
     const pathToValue = {
       "/home": 0,
@@ -43,9 +44,14 @@ const Header = (props) => {
       "/aboutUs": 2,
       "/contactUs": 3,
     };
-    const defaultValue = 0;
-    const value = pathToValue[window.location.pathname] || defaultValue;
+    const value = pathToValue[window.location.pathname] || 0;
     setValue(value);
+    if(![0,1,2,3].includes(value))
+    {
+      tabRemoveFocusStyle = {
+        '& .MuiTabs-indicator': { display: 'none' }
+      }
+    }
   }, []);
 
   const [anchorEl, setAnchorEl] = React.useState(null);
@@ -325,7 +331,7 @@ const Header = (props) => {
                             border:`2px solid ${theme.palette.text.tertiary}`,
                             padding:"1px",
                             borderRadius:"50%"
-                          }}src={userAvatar} alt={userData.name} />
+                          }} src={userAvatar} alt={userData.name} />
                         </Button>
                         <Menu
                           id="demo-positioned-menu"
@@ -360,8 +366,8 @@ const Header = (props) => {
                   container
                   sx={{ placeItems: "center", background: "white" }}
                 >
-                  <Grid item xs={1.5}></Grid>
-                  <Grid item xs={1.5}>
+                  <Grid item xs={1} md={1.5}></Grid>
+                  <Grid item xs={2} md={1.5}>
                     <Typography
                       color={theme.palette.text.primary}
                       sx={{ typography: { md: "body1", lg: "h6" } }}
@@ -372,7 +378,7 @@ const Header = (props) => {
                   <Grid item xs={5.5} md={4.5}>
                     <Tabs
                       // indicatorColor="white"
-                      sx={{ "&.MuiButtonBase-root ": { outline: "none" } }}
+                      sx={{ "&.MuiButtonBase-root ": { outline: "none" }, ...tabRemoveFocusStyle }}
                       textColor="primary"
                       value={value}
                       onChange={(e, value) => setValue(value)}

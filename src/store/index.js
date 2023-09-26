@@ -19,6 +19,7 @@ const persistConfig = {
   key: "root",
   version: 1,
   storage,
+  blacklist: [homePageConfigApi.reducerPath],
 };
 
 const rootReducer = combineReducers({
@@ -45,7 +46,7 @@ export let persistor = persistStore(store);
 
 setupListeners(store.dispatch);
 
-export { useUserLoginMutation } from "./apis/userLoginApi";
+export { useUserLoginMutation, useUserSignUpMutation} from "./apis/userLoginApi";
 
 export { useHomePageConfigQuery } from "./apis/homePageApi";
 

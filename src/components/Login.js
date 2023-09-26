@@ -19,7 +19,7 @@ import authService from "./../service/authService";
 import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
 import VisibilityIcon from "@mui/icons-material/Visibility";
 import Validator from "../utils/Validator";
-import { DEFAULT_RULE, EMAIL_RULE } from "../utils/Validator/rule";
+import { PASSWORD_RULE, EMAIL_RULE } from "../utils/Validator/rule";
 import "./Login.css";
 import { useUserLoginMutation } from "../store/index.js";
 
@@ -49,7 +49,7 @@ export default function Login(props) {
 
   const isVerifiedUser = (async (email, password) => {
     let isEmailValid = Validator(email, EMAIL_RULE);
-    let isPasswordValid = Validator(password, DEFAULT_RULE);
+    let isPasswordValid = Validator(password, PASSWORD_RULE);
     setEmailError(!isEmailValid);
     setShakeEmailError(!isEmailValid);
     setPasswordError(!isPasswordValid);
@@ -128,7 +128,7 @@ export default function Login(props) {
           Login
         </Typography>
         <Typography component="h6" variant="caption" color="#9096B2">
-          Please login using account detail bellow
+          Please login with your credentials below
         </Typography>
         <TextField
           onAnimationEnd={handleEmailShakeEnd}

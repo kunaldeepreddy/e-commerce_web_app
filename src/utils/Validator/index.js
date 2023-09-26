@@ -1,8 +1,3 @@
-/*
- ** Author: Santosh Kumar Dash
- ** Author URL: http://santoshdash.epizy.com/
- ** Github URL: https://github.com/quintuslabs/fashion-cube
- */
 
 const validate = (value, rules) => {
   let isValid = true;
@@ -25,6 +20,14 @@ const validate = (value, rules) => {
         isValid = isValid && emailValidator(value);
         break;
 
+      case "isName":
+        isValid = isValid && nameValidator(value);
+        break;
+      
+      case "isMobileNumber":
+          isValid = isValid && mobileValidator(value);
+          break;
+
       default:
         isValid = true;
     }
@@ -40,7 +43,7 @@ const validate = (value, rules) => {
  * @return
  */
 const minLengthValidator = (value, minLength) => {
-  return value.length >= minLength;
+  return value?.length >= minLength;
 };
 
 /**
@@ -50,7 +53,7 @@ const minLengthValidator = (value, minLength) => {
  * @return
  */
 const maxLengthValidator = (value, maxLength) => {
-  return value.length == maxLength;
+  return value?.length == maxLength;
 };
 
 /**
@@ -60,7 +63,7 @@ const maxLengthValidator = (value, maxLength) => {
  * @return
  */
 const requiredValidator = value => {
-  return value !== null && value.trim() !== "";
+  return value !== null && value?.trim() !== "";
 };
 
 /**
