@@ -21,13 +21,13 @@ function CardCarousel({ data, cardPanelType }) {
     // }
     var cardMediaStyle = {};
     if (isLgUpMatch) {
-        cardMediaStyle = { height: '30vh' };
+        cardMediaStyle = { height: '10rem' };
     } else if (isXsDownMatch) {
-        cardMediaStyle = { height: '30vh' };
+        cardMediaStyle = { height: '15rem' };
     } else if (isSmMatch) {
-        cardMediaStyle = { height: '25vh' };
+        cardMediaStyle = { height: '10rem' };
     } else if (isMdMatch) {
-        cardMediaStyle = { height: '20vh' };
+        cardMediaStyle = { height: '10rem' };
     }
     let cardsLength;
     if (cardPanelType === 'MultiPanelCardCarousel') {

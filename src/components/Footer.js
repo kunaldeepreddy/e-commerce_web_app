@@ -19,8 +19,8 @@ const Footer = () => {
         }} />
       </Box>
         <Container disableGutters maxWidth={false}  style={{fontSize:'14px'}} sx={{bgcolor: "#EEEFFB", color: theme.palette.text.secondary, paddingTop: "2rem" }}>
-            <Grid container spacing={1} >
-                <Grid item sm={1.75}></Grid>
+            <Grid container spacing={2} sx={{padding: "5%"}}>
+                <Grid item xs={1}></Grid>
                 <Grid item xs={12} sm={3}sx={{ display: 'flex', flexDirection:'column', alignItems: 'flex-start', justifyContent: 'space-between' }}>
                     <Typography color={theme.palette.text.primary} variant="h5">Homely Haven</Typography>
                     <TextField
@@ -84,7 +84,7 @@ const Footer = () => {
                     <Link className="linkClass" href="#" color="inherit" underline="none">Visual Composer Elements</Link><br/>
                     <Link className="linkClass" href="#" color="inherit" underline="none">WooCommerce Pages</Link><br/>
                 </Grid>
-                <Grid item sm={1}></Grid>
+                <Grid item xs={1} sm={1}></Grid>
             </Grid>
             <Grid container sx={{ placeItems: 'center', marginTop: "2rem", bgcolor: "#E7E4F8", pt: 0.5, pb: 0.5 }}>
                 <Grid item xs={7} sm={9}>

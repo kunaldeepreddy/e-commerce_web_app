@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { CardActionArea, CardContent, CardMedia, Container, Card, ListItemIcon, ListItem, ListSubheader, List, Grid, Box, Typography, useTheme, Backdrop, useMediaQuery, InputAdornment, Button, TextField } from "@mui/material";
+import { CardActionArea, CardContent, CardMedia, Container, Card, ListItemIcon, ListItem, List, Grid, Box, Typography, useTheme, Backdrop, useMediaQuery, InputAdornment, Button, TextField } from "@mui/material";
 import CircularProgress from '@mui/material/CircularProgress';
 import Carousel from 'react-material-ui-carousel'
 // import sofaImage from '../assets/sofa promotional header.png'
@@ -9,6 +9,7 @@ import homeContainerImage from '../assets/home-container-image.avif';
 import HomeCarousel from "./HomeCarousel.js";
 import CardCarousel from "./CardCarousel.js";
 import LatestProducts from "./LatestProducts.js";
+import FreshInStore from "./FreshInStore.js";
 import { useHomePageConfigQuery } from "../store/index.js";
 
 const Home = () => {
@@ -158,7 +159,8 @@ const Home = () => {
       </Box>
       <Box sx={{ pt: '5px' }}>
         <Typography color="#1A0B5B" variant="h5" sx={{ fontWeight: 800, textAlign: 'center', padding: '1em 0 1em 0' }}>Fresh in Store</Typography>
-        <Grid container spacing={2} >
+        <FreshInStore FreshProducts = {homePageConfigData.data.homePageProducts.bestSellerProducts} />
+        {/* <Grid container spacing={2} >
           <Grid item xs={2}>
           </Grid>
           <Grid item xs={8} sx={{ display: 'flex', flexWrap: 'wrap', flexDirection: "row", alignItems: 'center', justifyContent: "space-around", gap: '10px' }}>
@@ -214,7 +216,7 @@ const Home = () => {
           </Grid>
           <Grid item xs={2}>
           </Grid>
-        </Grid>
+        </Grid> */}
       </Box>
       <Box sx={{ backgroundColor: 'transparent', padding: '4rem 0 4rem 0', marginTop: '2rem' }} style={{
         backgroundImage: `url(${homeContainerImage})`, // Use the same background image
