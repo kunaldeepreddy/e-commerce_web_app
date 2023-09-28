@@ -64,10 +64,10 @@ function CardCarousel({ data, cardPanelType }) {
                     navButtonsAlwaysVisible={true}
                     fullHeightHover={true}
                     animation='slide'
-                    duration='500'
+                    duration='1000'
                     interval='4000'
                     swipe={true}
-                    autoPlay={false}
+                    autoPlay={true}
                     indicatorIconButtonProps={{
                         style: {// 1
                             // width: '10px',

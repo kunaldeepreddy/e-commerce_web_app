@@ -44,6 +44,7 @@ export default function Register(props) {
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
   const [showInvalidCredentials, setShowInvalidCredentials] = useState(false);
+  const [signUpFailureErrorMessage, setSignUpFailureErrorMessage] = useState("");
   const dispatch = useDispatch();
   const { enqueueSnackbar } = useSnackbar();
   const handleClickShowPassword = () => setShowPassword(!showPassword);
@@ -54,6 +55,7 @@ export default function Register(props) {
     const accountCopy = { ...account };
     accountCopy[property] = event.target.value;
     setAccount(accountCopy);
+    setSignUpFailureErrorMessage("");
   };
 
   const isVerifiedSignUp = (async (email, name, mobile_number, password, confirm_password) => {
@@ -62,7 +64,7 @@ export default function Register(props) {
     let isMobileNumberValid = Validator(mobile_number, PHONE_RULE);
     let isPasswordValid = Validator(password, PASSWORD_RULE);
     let isConfirmPasswordValid = Validator(confirm_password, PASSWORD_RULE);
-    let isConfirmPasswordMatch = password === confirm_password;;
+    let isConfirmPasswordMatch = password === confirm_password;
     setEmailError(!isEmailValid);
     setShakeEmailError(!isEmailValid);
     setNameError(!isNameValid);
@@ -80,7 +82,8 @@ export default function Register(props) {
         .unwrap()
         .then((response) => {
           // console.log(response);
-          if (response && response.status === true) {
+          if (response && response?.status === true) {
+            setSignUpFailureErrorMessage("")
             setShowInvalidCredentials(false);
             authService.doLogIn(account.email, response.data);
             dispatch(loginSuccess(response.data))
@@ -94,11 +97,14 @@ export default function Register(props) {
             });
             navigate("/home");
           } else {
+            setSignUpFailureErrorMessage(response?.message || "something went wrong. Please try again.")
             setShowInvalidCredentials(true);
           }
           return response;
         })
         .catch((err) => {
+          console.log(err)
+          setSignUpFailureErrorMessage(err?.data?.message || "something went wrong. Please try again.")
           setShowInvalidCredentials(true);
           return;
         });
@@ -129,7 +135,7 @@ export default function Register(props) {
     setShakePasswordMismatchError(false);
   };
 
-  const handelLogin = async () => {
+  const handelSignUp = async () => {
     await isVerifiedSignUp(account.email, account.name, account.mobile_number, account.password, account.confirm_password);
   };
 
@@ -300,7 +306,7 @@ export default function Register(props) {
         {/* <FormControlLabel control={<Checkbox value="remember" color="primary" />} label="Remember me" /> */}
         {showInvalidCredentials && (
           <h5 style={{ marginBottom: 0, color: theme.palette.error.main }}>
-            Invalid credentials. Please try again.
+            {signUpFailureErrorMessage}
           </h5>
         )}
         <LoadingButton
@@ -321,7 +327,7 @@ export default function Register(props) {
           }}
           disabled={registrationData.isLoading}
           loading={registrationData.isLoading}
-          onClick={handelLogin}
+          onClick={handelSignUp}
         >
           Sign In
         </LoadingButton>

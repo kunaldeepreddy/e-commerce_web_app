@@ -11,6 +11,7 @@ import CardCarousel from "./CardCarousel.js";
 import LatestProducts from "./LatestProducts.js";
 import FreshInStore from "./FreshInStore.js";
 import { useHomePageConfigQuery } from "../store/index.js";
+import homeCarouselImage from "../assets/carousel_background.png";
 
 const Home = () => {
   const theme = useTheme();
@@ -37,9 +38,11 @@ const Home = () => {
       </React.Fragment>
     ) : homePageConfigData && (
     <Container disableGutters maxWidth={false} >
+      <Box sx={{backgroundImage: `url(${homeCarouselImage})`, backgroundRepeat: "no-repeat", backgroundSize: 'cover',}}>
       <Carousel
         animation='slide'
         duration='500'
+        interval='5000'
         swipe={true}
         indicatorIconButtonProps={{
           style: {// 1
@@ -80,13 +83,14 @@ const Home = () => {
         }}
         indicatorContainerProps={{
           style: {
-            backgroundColor: "#F2F0FF",
+            // backgroundColor: "#F2F0FF",
             marginTop: "0px", // 5
             // textAligh: "left" // 4
           }
         }}>
-        {homeCarouselPics()}
+          {homeCarouselPics()}
       </Carousel>
+      </Box>
       <Typography color="#1A0B5B" variant="h5" sx={{ fontWeight: 800, textAlign: 'center', padding: '1em 0 1em 0' }}>Featured Products</Typography>
       <CardCarousel data={homePageConfigData.data.homePageProducts.featuredProducts} cardPanelType='MultiPanelCardCarousel' />
       <Box sx={{ pt: '5px' }}>
