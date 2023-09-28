@@ -8,6 +8,6 @@
 
 
 const DEV = `http://localhost:3005/api`
-const PROD = 'http://ec2-65-2-121-106.ap-south-1.compute.amazonaws.com:3005/api'
+const PROD = 'http://ec2-3-110-185-242.ap-south-1.compute.amazonaws.com:3100/api'
 
 export const BASE_URL = window.location.hostname.split(":")[0] === "localhost" || window.location.hostname.includes("192") ? DEV : PROD;
